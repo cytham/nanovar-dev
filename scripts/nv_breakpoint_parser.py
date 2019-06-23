@@ -105,12 +105,6 @@ def getSignature(bp1, name, querymap, sign, realnmaps, elist, bitlist, bps_no, c
                 break
     return signature
 
-def trysort(a,b):
-    try:
-        return sorted([a,b])
-    except:
-        return [a,b]
-
 logging.info('Start SV Parsing...')
 for i in c:
     g = g + 1
@@ -158,7 +152,7 @@ for i in c:
             uniqidx = bp_uname + '~' + str(chrom) + ':' + str(coord)
             uniqname = read_name + '~' + bp_uname
             if int(s_nov_ins_size) > cutoff:
-                print str(read_name) + '\t' + str(bp2-10) + '\t' + str(bp2) + '\t' + str(bp_name + '_bp') + ' ' + str(s_nov_ins_size) + '\t' + str(chrom) + '\t' + str(coord) + '\t' + str(uniqidx) + '\t' + str(pair) + '\t' + str(uniqname) + '\t' + str(signature)
+                print(str(read_name) + '\t' + str(bp2-10) + '\t' + str(bp2) + '\t' + str(bp_name + '_bp') + ' ' + str(s_nov_ins_size) + '\t' + str(chrom) + '\t' + str(coord) + '\t' + str(uniqidx) + '\t' + str(pair) + '\t' + str(uniqname) + '\t' + str(signature))
             iso_ins_counter = iso_ins_counter - 1
         elif bp_name == 'E-Nov_Ins':
             bp_uname = "".join(random.sample(ran, ran_len))
@@ -169,7 +163,7 @@ for i in c:
             uniqidx = bp_uname + '~' + str(chrom) + ':' + str(coord)
             uniqname = read_name + '~' + bp_uname
             if int(e_nov_ins_size) > cutoff:
-                print str(read_name) + '\t' + str(bp1) + '\t' + str(bp1+10) + '\t' + str(bp_name + '_bp') + ' ' + str(e_nov_ins_size) + '\t' + str(chrom) + '\t' + str(coord) + '\t' + str(uniqidx) + '\t' + str(pair) + '\t' + str(uniqname) + '\t' + str(signature)
+                print(str(read_name) + '\t' + str(bp1) + '\t' + str(bp1+10) + '\t' + str(bp_name + '_bp') + ' ' + str(e_nov_ins_size) + '\t' + str(chrom) + '\t' + str(coord) + '\t' + str(uniqidx) + '\t' + str(pair) + '\t' + str(uniqname) + '\t' + str(signature))
             iso_ins_counter = iso_ins_counter - 1
         elif bp_name == 'Del':
             bp_uname = "".join(random.sample(ran, ran_len))
@@ -181,8 +175,8 @@ for i in c:
             uniqidx = bp_uname + '~' + str(chrom) + ':' + str(min(coord1,coord2)) + '-' + str(max(coord1,coord2))
             uniqname = read_name + '~' + bp_uname
             if int(del_size) > cutoff:
-                print str(read_name) + '\t' + str(bp1) + '\t' + str(bp2) + '\t' + str(bp_name) + ' ' + str(del_size) + '\t' + str(chrom) + '\t' + str(coord1) + '\t' + str(uniqidx) + '\t' + str(pair) + '\t' + str(uniqname) + '\t' + str(signature)
-                print str(read_name) + '\t' + str(bp1) + '\t' + str(bp2) + '\t' + str(bp_name) + ' ' + str(del_size) + '\t' + str(chrom) + '\t' + str(coord2) + '\t' + str(uniqidx) + '\t' + str(pair) + '\t' + str(uniqname) + '\t' + str(signature)
+                print(str(read_name) + '\t' + str(bp1) + '\t' + str(bp2) + '\t' + str(bp_name) + ' ' + str(del_size) + '\t' + str(chrom) + '\t' + str(coord1) + '\t' + str(uniqidx) + '\t' + str(pair) + '\t' + str(uniqname) + '\t' + str(signature))
+                print(str(read_name) + '\t' + str(bp1) + '\t' + str(bp2) + '\t' + str(bp_name) + ' ' + str(del_size) + '\t' + str(chrom) + '\t' + str(coord2) + '\t' + str(uniqidx) + '\t' + str(pair) + '\t' + str(uniqname) + '\t' + str(signature))
             del_counter = del_counter - 1
         elif bp_name == 'Nov_Ins':
             bp_uname = "".join(random.sample(ran, ran_len))
@@ -193,8 +187,8 @@ for i in c:
             uniqidx = bp_uname + '~' + str(chrom) + ':' + str(min(coord1,coord2)) + '-' + str(max(coord1,coord2))
             uniqname = read_name + '~' + bp_uname
             if int(nov_ins_size) > cutoff:
-                print str(read_name) + '\t' + str(bp1) + '\t' + str(bp1+10) + '\t' + str(bp_name) + ' ' + str(nov_ins_size) + '\t' + str(chrom) + '\t' + str(coord1) + '\t' + str(uniqidx) + '\t' + str('Nov1') + '\t' + str(uniqname) + '\t' + str(signature)
-                print str(read_name) + '\t' + str(bp2-10) + '\t' + str(bp2) + '\t' + str(bp_name) + ' ' + str(nov_ins_size) + '\t' + str(chrom) + '\t' + str(coord2) + '\t' + str(uniqidx) + '\t' + str('Nov2') + '\t' + str(uniqname) + '\t' + str(signature)
+                print(str(read_name) + '\t' + str(bp1) + '\t' + str(bp1+10) + '\t' + str(bp_name) + ' ' + str(nov_ins_size) + '\t' + str(chrom) + '\t' + str(coord1) + '\t' + str(uniqidx) + '\t' + str('Nov1') + '\t' + str(uniqname) + '\t' + str(signature))
+                print(str(read_name) + '\t' + str(bp2-10) + '\t' + str(bp2) + '\t' + str(bp_name) + ' ' + str(nov_ins_size) + '\t' + str(chrom) + '\t' + str(coord2) + '\t' + str(uniqidx) + '\t' + str('Nov2') + '\t' + str(uniqname) + '\t' + str(signature))
             ins_counter = ins_counter - 1
         elif bp_name == 'TDupl':
             bp_uname = "".join(random.sample(ran, ran_len))
@@ -204,8 +198,8 @@ for i in c:
             pair = '.'
             uniqidx = bp_uname + '~' + str(chrom) + ':' + str(min(coord1,coord2)) + '-' + str(max(coord1,coord2))
             uniqname = read_name + '~' + bp_uname
-            print str(read_name) + '\t' + str(bp1) + '\t' + str(bp2) + '\t' + str(bp_name) + ' 99.99' + '\t' + str(chrom) + '\t' + str(coord1) + '\t' + str(uniqidx) + '\t' + str(pair) + '\t' + str(uniqname) + '\t' + str(signature)
-            print str(read_name) + '\t' + str(bp1) + '\t' + str(bp2) + '\t' + str(bp_name) + ' 99.99' + '\t' + str(chrom) + '\t' + str(coord2) + '\t' + str(uniqidx) + '\t' + str(pair) + '\t' + str(uniqname) + '\t' + str(signature)
+            print(str(read_name) + '\t' + str(bp1) + '\t' + str(bp2) + '\t' + str(bp_name) + ' 99.99' + '\t' + str(chrom) + '\t' + str(coord1) + '\t' + str(uniqidx) + '\t' + str(pair) + '\t' + str(uniqname) + '\t' + str(signature))
+            print(str(read_name) + '\t' + str(bp1) + '\t' + str(bp2) + '\t' + str(bp_name) + ' 99.99' + '\t' + str(chrom) + '\t' + str(coord2) + '\t' + str(uniqidx) + '\t' + str(pair) + '\t' + str(uniqname) + '\t' + str(signature))
             tdup_counter = tdup_counter - 1
         elif bp_name == 'Inv':
             bp_uname = "".join(random.sample(ran, ran_len))
@@ -215,8 +209,8 @@ for i in c:
             pair = '.'
             uniqidx = bp_uname + '~' + str(chrom) + ':' + str(min(coord1,coord2)) + '-' + str(max(coord1,coord2))
             uniqname = read_name + '~' + bp_uname
-            print str(read_name) + '\t' + str(bp1) + '\t' + str(bp2) + '\t' + str(bp_name) + ' 99.99' + '\t' + str(chrom) + '\t' + str(coord1) + '\t' + str(uniqidx) + '\t' + str(pair) + '\t' + str(uniqname) + '\t' + str(signature)
-            print str(read_name) + '\t' + str(bp1) + '\t' + str(bp2) + '\t' + str(bp_name) + ' 99.99' + '\t' + str(chrom) + '\t' + str(coord2) + '\t' + str(uniqidx) + '\t' + str(pair) + '\t' + str(uniqname) + '\t' + str(signature)
+            print(str(read_name) + '\t' + str(bp1) + '\t' + str(bp2) + '\t' + str(bp_name) + ' 99.99' + '\t' + str(chrom) + '\t' + str(coord1) + '\t' + str(uniqidx) + '\t' + str(pair) + '\t' + str(uniqname) + '\t' + str(signature))
+            print(str(read_name) + '\t' + str(bp1) + '\t' + str(bp2) + '\t' + str(bp_name) + ' 99.99' + '\t' + str(chrom) + '\t' + str(coord2) + '\t' + str(uniqidx) + '\t' + str(pair) + '\t' + str(uniqname) + '\t' + str(signature))
             inv_counter = inv_counter - 1
         elif bp_name == 'Inv(1)':
             bp_uname = "".join(random.sample(ran, ran_len))
@@ -228,8 +222,8 @@ for i in c:
             uniqidx = bp_uname + '~' + str(chrom) + ':' + str(min(coord1,coord2)) + '-' + str(max(coord1,coord2))
             uniqname = read_name + '~' + bp_uname
             if int(inv_size) > cutoff:
-                print str(read_name) + '\t' + str(bp1) + '\t' + str(bp2) + '\t' + str(bp_name) + ' ' + str(inv_size) + '\t' + str(chrom) + '\t' + str(coord1) + '\t' + str(uniqidx) + '\t' + str(pair) + '\t' + str(uniqname) + '\t' + str(signature)
-                print str(read_name) + '\t' + str(bp1) + '\t' + str(bp2) + '\t' + str(bp_name) + ' ' + str(inv_size) + '\t' + str(chrom) + '\t' + str(coord2) + '\t' + str(uniqidx) + '\t' + str(pair) + '\t' + str(uniqname) + '\t' + str(signature)
+                print(str(read_name) + '\t' + str(bp1) + '\t' + str(bp2) + '\t' + str(bp_name) + ' ' + str(inv_size) + '\t' + str(chrom) + '\t' + str(coord1) + '\t' + str(uniqidx) + '\t' + str(pair) + '\t' + str(uniqname) + '\t' + str(signature))
+                print(str(read_name) + '\t' + str(bp1) + '\t' + str(bp2) + '\t' + str(bp_name) + ' ' + str(inv_size) + '\t' + str(chrom) + '\t' + str(coord2) + '\t' + str(uniqidx) + '\t' + str(pair) + '\t' + str(uniqname) + '\t' + str(signature))
             inv_counter = inv_counter - 1
         elif bp_name == 'Inv(2)':
             bp_uname = "".join(random.sample(ran, ran_len))
@@ -241,8 +235,8 @@ for i in c:
             uniqidx = bp_uname + '~' + str(chrom) + ':' + str(min(coord1,coord2)) + '-' + str(max(coord1,coord2))
             uniqname = read_name + '~' + bp_uname
             if int(inv_size) > cutoff:
-                print str(read_name) + '\t' + str(bp1) + '\t' + str(bp2) + '\t' + str(bp_name) + ' ' + str(inv_size) + '\t' + str(chrom) + '\t' + str(coord1) + '\t' + str(uniqidx) + '\t' + str(pair) + '\t' + str(uniqname) + '\t' + str(signature)
-                print str(read_name) + '\t' + str(bp1) + '\t' + str(bp2) + '\t' + str(bp_name) + ' ' + str(inv_size) + '\t' + str(chrom) + '\t' + str(coord2) + '\t' + str(uniqidx) + '\t' + str(pair) + '\t' + str(uniqname) + '\t' + str(signature)
+                print(str(read_name) + '\t' + str(bp1) + '\t' + str(bp2) + '\t' + str(bp_name) + ' ' + str(inv_size) + '\t' + str(chrom) + '\t' + str(coord1) + '\t' + str(uniqidx) + '\t' + str(pair) + '\t' + str(uniqname) + '\t' + str(signature))
+                print(str(read_name) + '\t' + str(bp1) + '\t' + str(bp2) + '\t' + str(bp_name) + ' ' + str(inv_size) + '\t' + str(chrom) + '\t' + str(coord2) + '\t' + str(uniqidx) + '\t' + str(pair) + '\t' + str(uniqname) + '\t' + str(signature))
             inv_counter = inv_counter - 1
         elif bp_name == 'Intra-Ins':
             bp_uname = "".join(random.sample(ran, ran_len))
@@ -252,8 +246,8 @@ for i in c:
             pair = '.'
             uniqidx = bp_uname + '~' + str(chrom) + ':' + str(min(coord1,coord2)) + '-' + str(max(coord1,coord2))
             uniqname = read_name + '~' + bp_uname
-            print str(read_name) + '\t' + str(bp1) + '\t' + str(bp2) + '\t' + str(bp_name) + ' 99.99' + '\t' + str(chrom) + '\t' + str(coord1) + '\t' + str(uniqidx) + '\t' + str(pair) + '\t' + str(uniqname) + '\t' + str(signature)
-            print str(read_name) + '\t' + str(bp1) + '\t' + str(bp2) + '\t' + str(bp_name) + ' 99.99' + '\t' + str(chrom) + '\t' + str(coord2) + '\t' + str(uniqidx) + '\t' + str(pair) + '\t' + str(uniqname) + '\t' + str(signature)
+            print(str(read_name) + '\t' + str(bp1) + '\t' + str(bp2) + '\t' + str(bp_name) + ' 99.99' + '\t' + str(chrom) + '\t' + str(coord1) + '\t' + str(uniqidx) + '\t' + str(pair) + '\t' + str(uniqname) + '\t' + str(signature))
+            print(str(read_name) + '\t' + str(bp1) + '\t' + str(bp2) + '\t' + str(bp_name) + ' 99.99' + '\t' + str(chrom) + '\t' + str(coord2) + '\t' + str(uniqidx) + '\t' + str(pair) + '\t' + str(uniqname) + '\t' + str(signature))
             intra_ins_counter = intra_ins_counter - 1
         elif bp_name == 'Intra-Ins(1)':
             bp_uname = "".join(random.sample(ran, ran_len))
@@ -265,8 +259,8 @@ for i in c:
             uniqidx = bp_uname + '~' + str(chrom) + ':' + str(min(coord1,coord2)) + '-' + str(max(coord1,coord2))
             uniqname = read_name + '~' + bp_uname
             if int(intrains_size) > cutoff:
-                print str(read_name) + '\t' + str(bp1) + '\t' + str(bp2) + '\t' + str(bp_name) + ' ' + str(intrains_size) + '\t' + str(chrom) + '\t' + str(coord1) + '\t' + str(uniqidx) + '\t' + str(pair) + '\t' + str(uniqname) + '\t' + str(signature)
-                print str(read_name) + '\t' + str(bp1) + '\t' + str(bp2) + '\t' + str(bp_name) + ' ' + str(intrains_size) + '\t' + str(chrom) + '\t' + str(coord2) + '\t' + str(uniqidx) + '\t' + str(pair) + '\t' + str(uniqname) + '\t' + str(signature)
+                print(str(read_name) + '\t' + str(bp1) + '\t' + str(bp2) + '\t' + str(bp_name) + ' ' + str(intrains_size) + '\t' + str(chrom) + '\t' + str(coord1) + '\t' + str(uniqidx) + '\t' + str(pair) + '\t' + str(uniqname) + '\t' + str(signature))
+                print(str(read_name) + '\t' + str(bp1) + '\t' + str(bp2) + '\t' + str(bp_name) + ' ' + str(intrains_size) + '\t' + str(chrom) + '\t' + str(coord2) + '\t' + str(uniqidx) + '\t' + str(pair) + '\t' + str(uniqname) + '\t' + str(signature))
             intra_ins_counter = intra_ins_counter - 1
         elif bp_name == 'Intra-Ins(2)':
             bp_uname = "".join(random.sample(ran, ran_len))
@@ -278,8 +272,8 @@ for i in c:
             uniqidx = bp_uname + '~' + str(chrom) + ':' + str(min(coord1,coord2)) + '-' + str(max(coord1,coord2))
             uniqname = read_name + '~' + bp_uname
             if int(intrains_size) > cutoff:
-                print str(read_name) + '\t' + str(bp1) + '\t' + str(bp2) + '\t' + str(bp_name) + ' ' + str(intrains_size) + '\t' + str(chrom) + '\t' + str(coord1) + '\t' + str(uniqidx) + '\t' + str(pair) + '\t' + str(uniqname) + '\t' + str(signature)
-                print str(read_name) + '\t' + str(bp1) + '\t' + str(bp2) + '\t' + str(bp_name) + ' ' + str(intrains_size) + '\t' + str(chrom) + '\t' + str(coord2) + '\t' + str(uniqidx) + '\t' + str(pair) + '\t' + str(uniqname) + '\t' + str(signature)
+                print(str(read_name) + '\t' + str(bp1) + '\t' + str(bp2) + '\t' + str(bp_name) + ' ' + str(intrains_size) + '\t' + str(chrom) + '\t' + str(coord1) + '\t' + str(uniqidx) + '\t' + str(pair) + '\t' + str(uniqname) + '\t' + str(signature))
+                print(str(read_name) + '\t' + str(bp1) + '\t' + str(bp2) + '\t' + str(bp_name) + ' ' + str(intrains_size) + '\t' + str(chrom) + '\t' + str(coord2) + '\t' + str(uniqidx) + '\t' + str(pair) + '\t' + str(uniqname) + '\t' + str(signature))
             intra_ins_counter = intra_ins_counter - 1
         elif bp_name == 'Inter-Ins(1)':
             bp_uname = "".join(random.sample(ran, ran_len))
@@ -289,13 +283,13 @@ for i in c:
             coord2_1 = breakpointfile[i].split('\t')[13].split(' ')[1].split(',')[int(inter_ins_count - inter_ins_counter)].split('~')[1].split(':')[1]
             interins_size = breakpointfile[i].split('\t')[13].split(' ')[0].split(',')[int(inter_ins_count - inter_ins_counter)].split(')')[1]
             chrmdict = {chrnum(chrom1):coord1_1, chrnum(chrom2):coord2_1}
-            chrmlist = trysort(chrnum(chrom1),chrnum(chrom2)) #chrmlist = sorted([chrnum(chrom1), chrnum(chrom2)])
+            chrmlist = sorted([chrnum(chrom1), chrnum(chrom2)])
             pair = 'Inter1'
             uniqidx = bp_uname + '~' + str(revchrnum(chrmlist[0])) + ':' + str(chrmdict[chrmlist[0]]) + '~' + str(revchrnum(chrmlist[1])) + ':' + str(chrmdict[chrmlist[1]])
             uniqname = read_name + '~' + bp_uname
             if int(interins_size) > cutoff:
-                print str(read_name) + '\t' + str(bp1) + '\t' + str(bp2) + '\t' + str(bp_name) + ' ' + str(interins_size) + '\t' + str(revchrnum(chrmlist[0])) + '\t' + str(chrmdict[chrmlist[0]]) + '\t' + str(uniqidx) + '\t' + str(pair) + '\t' + str(uniqname) + '\t' + str(signature)
-                print str(read_name) + '\t' + str(bp1) + '\t' + str(bp2) + '\t' + str(bp_name) + ' ' + str(interins_size) + '\t' + str(revchrnum(chrmlist[1])) + '\t' + str(chrmdict[chrmlist[1]]) + '\t' + str(uniqidx) + '\t' + str(pair) + '\t' + str(uniqname) + '\t' + str(signature)
+                print(str(read_name) + '\t' + str(bp1) + '\t' + str(bp2) + '\t' + str(bp_name) + ' ' + str(interins_size) + '\t' + str(revchrnum(chrmlist[0])) + '\t' + str(chrmdict[chrmlist[0]]) + '\t' + str(uniqidx) + '\t' + str(pair) + '\t' + str(uniqname) + '\t' + str(signature))
+                print(str(read_name) + '\t' + str(bp1) + '\t' + str(bp2) + '\t' + str(bp_name) + ' ' + str(interins_size) + '\t' + str(revchrnum(chrmlist[1])) + '\t' + str(chrmdict[chrmlist[1]]) + '\t' + str(uniqidx) + '\t' + str(pair) + '\t' + str(uniqname) + '\t' + str(signature))
             inter_ins_counter = inter_ins_counter - 1
         elif bp_name == 'Inter-Ins(2)':
             bp_uname = "".join(random.sample(ran, ran_len))
@@ -305,13 +299,13 @@ for i in c:
             coord2_1 = breakpointfile[i].split('\t')[13].split(' ')[1].split(',')[int(inter_ins_count - inter_ins_counter)].split('~')[1].split(':')[1]
             interins_size = breakpointfile[i].split('\t')[13].split(' ')[0].split(',')[int(inter_ins_count - inter_ins_counter)].split(')')[1]
             chrmdict = {chrnum(chrom1):coord1_1, chrnum(chrom2):coord2_1}
-            chrmlist = trysort(chrnum(chrom1),chrnum(chrom2)) #chrmlist = sorted([chrnum(chrom1), chrnum(chrom2)])
+            chrmlist = sorted([chrnum(chrom1), chrnum(chrom2)])
             pair = 'Inter2'
             uniqidx = bp_uname + '~' + str(revchrnum(chrmlist[0])) + ':' + str(chrmdict[chrmlist[0]]) + '~' + str(revchrnum(chrmlist[1])) + ':' + str(chrmdict[chrmlist[1]])
             uniqname = read_name + '~' + bp_uname
             if int(interins_size) > cutoff:
-                print str(read_name) + '\t' + str(bp1) + '\t' + str(bp2) + '\t' + str(bp_name) + ' ' + str(interins_size) + '\t' + str(revchrnum(chrmlist[0])) + '\t' + str(chrmdict[chrmlist[0]]) + '\t' + str(uniqidx) + '\t' + str(pair) + '\t' + str(uniqname) + '\t' + str(signature)
-                print str(read_name) + '\t' + str(bp1) + '\t' + str(bp2) + '\t' + str(bp_name) + ' ' + str(interins_size) + '\t' + str(revchrnum(chrmlist[1])) + '\t' + str(chrmdict[chrmlist[1]]) + '\t' + str(uniqidx) + '\t' + str(pair) + '\t' + str(uniqname) + '\t' + str(signature)
+                print(str(read_name) + '\t' + str(bp1) + '\t' + str(bp2) + '\t' + str(bp_name) + ' ' + str(interins_size) + '\t' + str(revchrnum(chrmlist[0])) + '\t' + str(chrmdict[chrmlist[0]]) + '\t' + str(uniqidx) + '\t' + str(pair) + '\t' + str(uniqname) + '\t' + str(signature))
+                print(str(read_name) + '\t' + str(bp1) + '\t' + str(bp2) + '\t' + str(bp_name) + ' ' + str(interins_size) + '\t' + str(revchrnum(chrmlist[1])) + '\t' + str(chrmdict[chrmlist[1]]) + '\t' + str(uniqidx) + '\t' + str(pair) + '\t' + str(uniqname) + '\t' + str(signature))
             inter_ins_counter = inter_ins_counter - 1
         elif bp_name == 'InterTx':
             bp_uname = "".join(random.sample(ran, ran_len))
@@ -320,12 +314,12 @@ for i in c:
             chrom2 = breakpointfile[i].split('\t')[14].split(' ')[1].split(',')[int(inter_tx_count - inter_tx_counter)].split('~')[1].split(':')[0]
             coord2_1 = breakpointfile[i].split('\t')[14].split(' ')[1].split(',')[int(inter_tx_count - inter_tx_counter)].split('~')[1].split(':')[1]
             chrmdict = {chrnum(chrom1):coord1_1, chrnum(chrom2):coord2_1}
-            chrmlist = trysort(chrnum(chrom1),chrnum(chrom2)) #chrmlist = sorted([chrnum(chrom1), chrnum(chrom2)])
+            chrmlist = sorted([chrnum(chrom1), chrnum(chrom2)])
             pair = '.'
             uniqidx = bp_uname + '~' + str(revchrnum(chrmlist[0])) + ':' + str(chrmdict[chrmlist[0]]) + '~' + str(revchrnum(chrmlist[1])) + ':' + str(chrmdict[chrmlist[1]])
             uniqname = read_name + '~' + bp_uname
-            print str(read_name) + '\t' + str(bp1) + '\t' + str(bp2) + '\t' + str(bp_name) + ' 99.99' + '\t' + str(revchrnum(chrmlist[0])) + '\t' + str(chrmdict[chrmlist[0]]) + '\t' + str(uniqidx) + '\t' + str(pair) + '\t' + str(uniqname) + '\t' + str(signature)
-            print str(read_name) + '\t' + str(bp1) + '\t' + str(bp2) + '\t' + str(bp_name) + ' 99.99' + '\t' + str(revchrnum(chrmlist[1])) + '\t' + str(chrmdict[chrmlist[1]]) + '\t' + str(uniqidx) + '\t' + str(pair) + '\t' + str(uniqname) + '\t' + str(signature)
+            print(str(read_name) + '\t' + str(bp1) + '\t' + str(bp2) + '\t' + str(bp_name) + ' 99.99' + '\t' + str(revchrnum(chrmlist[0])) + '\t' + str(chrmdict[chrmlist[0]]) + '\t' + str(uniqidx) + '\t' + str(pair) + '\t' + str(uniqname) + '\t' + str(signature))
+            print(str(read_name) + '\t' + str(bp1) + '\t' + str(bp2) + '\t' + str(bp_name) + ' 99.99' + '\t' + str(revchrnum(chrmlist[1])) + '\t' + str(chrmdict[chrmlist[1]]) + '\t' + str(uniqidx) + '\t' + str(pair) + '\t' + str(uniqname) + '\t' + str(signature))
             inter_tx_counter = inter_tx_counter - 1
         else:
             sys.exit("ERROR @ line " + str(g) + ' Unidentifiable SV')

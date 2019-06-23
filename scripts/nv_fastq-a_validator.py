@@ -30,28 +30,28 @@ c = 0
 
 with open(shortr) as s:
     try:
-        line1 = [next(s) for x in xrange(2)]
-        line2 = [next(s) for x in xrange(2)]
+        line1 = [next(s) for x in range(2)]
+        line2 = [next(s) for x in range(2)]
     except:
         pass
     try:
         if line2:
             if line1[0][0] == '>':
                 if line2[0][0] == '>':
-                    print 'fasta'
+                    print('fasta')
                 else:
-                    print 'corrupt'
+                    print('corrupt')
             elif line1[0][0] == '@':
                 if line2[0][0] == '+':
-                    print 'fastq'
+                    print('fastq')
                 else:
-                    print 'corrupt'
+                    print('corrupt')
             else:
-                print 'corrupt'
+                print('corrupt')
     except:
         if line1[0][0] == '>':
-            print 'fasta'
+            print('fasta')
         elif line1[0][0] == '@': 
-            print 'fastq'
+            print('fastq')
         else:
-            print 'corrupt'
+            print('corrupt')

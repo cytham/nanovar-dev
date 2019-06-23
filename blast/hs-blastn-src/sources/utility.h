@@ -202,7 +202,7 @@ const int kMaxDoubleStringSize = 308 + 3 + kMaxDoublePrecision;
 						n = 3;
 					}
 				}
-				else if (std::isnan(value))
+				else if (isnan(value))
 				{
 					strcpy(buffer, "NaN");
 					n = 4;

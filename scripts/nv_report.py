@@ -71,7 +71,7 @@ ax.annotate("Threshold=" + str(threshold), xy=(0.05,threshold+0.2))
 ax.set_facecolor('#ebebff')#e6e6ff
 plt.ylabel('Confidence score')
 plt.xlabel('Breakend read ratio')
-plt.ylim(ymin=-0.3)
+plt.ylim(bottom=-0.3)
 #plt.title("SV score vs SV read ratio")
 plt.savefig('figures/scatter1.png',bbox_inches='tight', dpi=100, facecolor=fig.get_facecolor(), edgecolor='none')
 
@@ -85,7 +85,7 @@ ax.annotate("Threshold=" + str(threshold), xy=(mcov - 2.8,threshold+0.2))
 ax.set_facecolor('#ebebff')
 plt.ylabel('Confidence score')
 plt.xlabel('Number of breakend-supporting reads')
-plt.ylim(ymin=-0.3)
+plt.ylim(bottom=-0.3)
 #plt.title("SV score vs SV read depth")
 plt.savefig('figures/scatter2.png',bbox_inches='tight', dpi=100, facecolor=fig.get_facecolor(), edgecolor='none')
 
@@ -342,7 +342,7 @@ begin = """<!DOCTYPE html>
 <div id="margin">
     <div>
         <h1 style="text-align:center;">NanoVar Report</h1>
-        <h5 style="text-align:center;">Version: NanoVar 1.0.1</h5>
+        <h5 style="text-align:center;">Version: NanoVar 1.1.0</h5>
         <h5 style="text-align:center;">""" + str(now.strftime("%a %d %B %Y")) + """</h5>
         <h5 style="text-align:center;">""" + fastaname + """</h5>
         <br>

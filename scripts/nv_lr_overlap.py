@@ -22,6 +22,7 @@ along with NanoVar.  If not, see <https://www.gnu.org/licenses/>.
 from sys import argv
 import sys
 import os
+from collections import OrderedDict
 
 #Ensure correct number of inputs
 if len(argv)<6 or len(argv)>=7:
@@ -57,11 +58,11 @@ def mz(value):
 
 #Function to collect information of each breakpoint entry (e.g. chromosome, range, SV size, SV type)
 def rangecollect(x):
-    namerepeat = {}
-    rangedict = {}
-    svsizedict = {}
-    DNNdict = {}
-    infodict = {}
+    namerepeat = OrderedDict()
+    rangedict = OrderedDict()
+    svsizedict = OrderedDict()
+    DNNdict = OrderedDict()
+    infodict = OrderedDict()
     bed1 = []
     bed2 = []
     for i in x:
@@ -127,7 +128,8 @@ def rangecollect(x):
                 bed1.append(chm2 + '\t' + str(r) + '\t' + str(r+1) + '\t' + rnameidx + '-r' + '\t' + svtype)
                 bed2.append(chm1 + '\t' + str(mz(l-buf)) + '\t' + str(l+buf) + '\t' + rnameidx + '-l' + '\t' + svtype)
                 bed2.append(chm2 + '\t' + str(mz(r-buf)) + '\t' + str(r+buf) + '\t' + rnameidx + '-r' + '\t' + svtype)
-    return rangedict,svsizedict,DNNdict,infodict,bed1,bed2
+    svsizedictsort = [key for (key, value) in sorted(svsizedict.items(), key=lambda x:x[1], reverse=True)]
+    return rangedict,svsizedictsort,DNNdict,infodict,bed1,bed2
 
 #Function to standardize names of SV types
 def svtypecorrector(svtype):
@@ -176,8 +178,8 @@ def svgroup(svclass):
 
 #Function to connect overlaping overlaping breakpoint entries
 def intersection(intersect):
-    connectdict = {}
-    classdict = {}
+    connectdict = OrderedDict()
+    classdict = OrderedDict()
     for i in bed1:
         connectdict[i.split('\t')[3]] = []
         classdict[i.split('\t')[3][0:-2]] = i.split('\t')[4]
@@ -188,18 +190,20 @@ def intersection(intersect):
 
 #Remove unique identifier from read name
 def remove_uniq(x):
-    connectdictname = {}
+    newdictnouniq = OrderedDict()
     for i in x:
-        connectdictname[i[:-8]] = []
-    return connectdictname
+        newdictnouniq[i] = []
+        for j in x[i]:
+            newdictnouniq[i].append(j[:-8])
+    return newdictnouniq
 
 def intersection2(intersect2, x, nsplit):
-    svnormalconnect = {}
-    svnormalcov = {}
+    svnormalconnect = OrderedDict()
+    svnormalcov = OrderedDict()
     for key in x:
         svnormalconnect[key] = []
     for i in intersect2:
-        if not connectdictname.has_key(i.split('\t')[3]):
+        if i.split('\t')[3] not in newdictnouniq[i.split('\t')[7]]:
             if classdict[i.split('\t')[7]] == 'TDupl': #If Dup, make sure normal read covers both breakpoints of Dup
                 for n in infodict[i.split('\t')[7]]:
                     if int(i.split('\t')[1]) <= int(infodict[i.split('\t')[7]][0].split('\t')[5]) <= int(i.split('\t')[2]) and int(i.split('\t')[1]) <= int(infodict[i.split('\t')[7]][1].split('\t')[5]) <= int(i.split('\t')[2]):
@@ -207,7 +211,7 @@ def intersection2(intersect2, x, nsplit):
             else:
                 svnormalconnect[i.split('\t')[7]].append(i.split('\t')[3])
     for key in svnormalconnect:
-        svnormalcov[key] = float(len(set(svnormalconnect[key])))/nsplit
+        svnormalcov[key] = float(len(set(svnormalconnect[key])))/nsplit #set() removes duplicates
     return svnormalcov
 
 #Ordering classes
@@ -218,7 +222,7 @@ def classranker(x):
     tier1 = []
     tier2 = []
     tier3 = []
-    for keys in x:
+    for keys in svsizedictsort:
         if x[keys] in tier1sv:
             tier1.append(keys)
         elif x[keys] in tier2sv:
@@ -226,24 +230,24 @@ def classranker(x):
         elif x[keys] in tier3sv:
             tier3.append(keys)
         else:
-            print 'sv class error'
+            print('sv class error')
             sys.exit()
     return tier1,tier2,tier3
 
 def connector(x):
-    namerepeat = {}
-    readdictA = {}
-    readdictB = {}
+    namerepeat = OrderedDict()
+    readdictA = OrderedDict()
+    readdictB = OrderedDict()
     alltier = tier3 + tier2 + tier1
     for keys in alltier:
-        if not namerepeat.has_key(keys):
+        if keys not in namerepeat: #if not namerepeat.has_key(keys):
             namerepeat[keys] = 1
             readdictA[keys] = []
             readdictB[keys] = []
             readdictB[keys].append(classdict[keys])
             for i in x[keys + '-l']:
-                if not namerepeat.has_key(i):
-                    if x.has_key(keys + '-r'):
+                if i not in namerepeat: #if not namerepeat.has_key(i):
+                    if keys + '-r' in x: #if x.has_key(keys + '-r'):
                         if i in x[keys + '-r']:
                             namerepeat[i] = 1
                             readdictA[keys].append(i)
@@ -257,17 +261,17 @@ def connector(x):
                         namerepeat[i] = 1
                         readdictA[keys].append(i)
                         readdictB[keys].append(classdict[i])
-            if x.has_key(keys + '-r'):
+            if keys + '-r' in x: #if x.has_key(keys + '-r'):
                 for i in x[keys + '-r']:
-                    if not namerepeat.has_key(i):
+                    if i not in namerepeat: #if not namerepeat.has_key(i):
                         if i in tier1: #Only for single-bp-end reads
                             namerepeat[i] = 1
                             readdictA[keys].append(i)
                             readdictB[keys].append(classdict[i])
             for i in readdictA[keys]:
                 for k in x[i + '-l']:
-                    if not namerepeat.has_key(k):
-                        if x.has_key(i + '-r'):
+                    if k not in namerepeat: #if not namerepeat.has_key(k):
+                        if i + '-r' in x: #if x.has_key(i + '-r'):
                             if k in x[i + '-r']:
                                 namerepeat[k] = 1
                                 readdictA[keys].append(k)
@@ -278,14 +282,14 @@ def connector(x):
 
 #Function to rank and filter best sv type
 def classupdate(readdictB):
-    readdictC = {}
-    d = {}
+    readdictC = OrderedDict()
+    d = OrderedDict()
     tier3sv = ['Inv2', 'Inter-Ins', 'Intra-Ins2']
     tier2sv = ['Inv', 'Del', 'TDupl', 'Nov_Ins', 'Intra-Ins', 'Inter']
     tier1sv = ['bp_Nov_Ins']
     for keys in readdictB:
         for i in readdictB[keys]:
-            if not d.has_key(i):
+            if i not in d: #if not d.has_key(i):
                 d[i] = 1
             else:
                 d[i] += 1
@@ -308,19 +312,19 @@ def classupdate(readdictB):
             pass
         else:
             sys.exit("ERROR: UNKNOWN SV CLASS")
-            print "Uknown class"
-            print keys
-            print i
-            print d
+            print("Uknown class")
+            print(keys)
+            print(i)
+            print(d)
             break
         mainsv = [key for (key, value) in sorted(d.items(), key=lambda x:x[1], reverse=True)][0]
         readdictC[keys] = mainsv
-        d = {}
+        d = OrderedDict()
     return readdictC
 
 #Function to find the lead breakpoint entry based on main sv type first come across
 def bestread(x):
-    newdict = {}
+    newdict = OrderedDict()
     for keys in x:
         main = ''
         mainsv = readdictC[keys]
@@ -363,7 +367,7 @@ def svbed(x):
 
 #Function to count total number of unique reads in an overlaping breakpoint entry
 def countcov(key, dict):
-    readdict = {}
+    readdict = OrderedDict()
     readdict[key[:-6]] = 1
     for i in dict[key]:
         readdict[i[:-6]] = 1
@@ -408,7 +412,7 @@ def arrangeDNN(x):
     return output
 
 def main():
-    global svsizedict
+    global svsizedictsort
     global DNNdict
     global infodict
     global bed1
@@ -418,7 +422,7 @@ def main():
     global tier2
     global tier3
     global readdictC
-    global connectdictname
+    global newdictnouniq
     global svnormalcov
     parsefile = open(parse_file, 'r').read().splitlines()
     #Test for DNN scoring
@@ -427,7 +431,7 @@ def main():
             DNN = 1
     except:
         DNN = 0
-    rangedict,svsizedict,DNNdict,infodict,bed1,bed2 = rangecollect(parsefile)
+    rangedict,svsizedictsort,DNNdict,infodict,bed1,bed2 = rangecollect(parsefile)
     bedout1 = open('bed1', 'w')
     bedout1.write('\n'.join(bed1))
     bedout1.close()
@@ -454,7 +458,7 @@ def main():
     bedout4.close()
     os.system(bedpath + ' sort -i bed4 > bed4.sort')
     os.system(bedpath + " intersect -wa -wb -a bed3.sort -b bed4.sort | awk -F'\t' '{if ($4 != $8) print $0}' > intersect2.txt")
-    connectdictname = remove_uniq(connectdict) #Remove unique identifier from read name
+    newdictnouniq = remove_uniq(newdict) #Remove unique identifier from read name
     intersect2 = open('intersect2.txt', 'r').read().splitlines()
     svnormalcov = intersection2(intersect2, newdict, nsplit)
     if DNN == 0:
@@ -462,7 +466,7 @@ def main():
     elif DNN == 1:
         output = arrangeDNN(newdict)
     output[-1] = output[-1].strip('\n')
-    print ''.join(output)
+    print(''.join(output))
 
 if __name__ == '__main__':
     main()

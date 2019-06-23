@@ -24,6 +24,7 @@ import sys
 import os
 import logging
 import random
+from collections import OrderedDict
 
 #Ensure correct number of inputs
 if len(argv)<4 or len(argv)>=5:
@@ -41,10 +42,10 @@ def splitter(parse):
     n = len(pdata)
     pdata.append('dum\tdum\tdum\tdum\tdum\tdum\tdum\tdum\tdum\tdum\tdum')
     temp = []
-    outputdict = {}
+    outputdict = OrderedDict()
     for i in range(splitno):
         outputdict[i + 1] = open('parse_' + str(i+1) + '.tsv', 'w')
-    for i in xrange(n):
+    for i in range(n):
         if pdata[i].split('\t')[0] == pdata[i+1].split('\t')[0]:
             temp.append(pdata[i])
         else:

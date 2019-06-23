@@ -93,36 +93,6 @@ def mad(x):
     return b*np.mean(abs(x-np.median(x)))
 
 #Plot curve
-def curve_old(data, n, nsplit):
-    c = range(21)
-    p = []
-    for i in c:
-        p.append(data.count(i))
-    p.append(n - sum(p))
-    y = [(float(z)/n) for z in p]
-    theoretical = [0.0915, 0.0441, 0.1032, 0.1498, 0.1739, 0.1626, 0.1132, 0.0808, 0.0412, 0.0247, 0.0097, 0.0028, 0.0015, 0.0006, 0.0002, 0.0002, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
-    c.append('21')
-    xnew = np.linspace(0,21,100)
-    smooth = spline(c,y,xnew)
-    tsmooth = spline(c,theoretical,xnew)
-    params = {'axes.labelsize': 14,'axes.titlesize':17, 'legend.fontsize': 10, 'xtick.labelsize': 12, 'ytick.labelsize': 12, 'font.family': 'Arial, Helvetica, sans-serif'}
-    matplotlib.rcParams.update(params)
-    fig = plt.figure(figsize=(8, 6))
-    fig.patch.set_facecolor('#f6f7f9')
-    ax = fig.add_subplot(111)
-    ax.plot(xnew, smooth, color='#403f7d', linewidth=2.0)
-    ax.plot(xnew, tsmooth, color='#7c7d3f', linewidth=2.0, alpha=1)
-    ax.set_facecolor('#ebebff')
-    plt.xticks(range(22), ('0','1','2','3','4','5','6','7','8','9','10','11','12','13','14','15','16','17','18','19','20','>20'))
-    ax.grid(color='w', linestyle='-', linewidth=1)
-    vals = ax.get_yticks()
-    ax.set_yticklabels(['{:,.1%}'.format(x) for x in vals])
-    plt.ylabel('Percentage')
-    plt.xlabel('Depth of coverage')
-    #plt.title("Read depth across " + str(n) + " points in genome")
-    ax.legend(['Input FASTA (spilt_factor=' + str(nsplit) + ')', 'Theoretical 4x hg38 depth'], loc='upper right', ncol=1, fancybox=True)
-    plt.savefig('../../nanovar_results/figures/depth_of_coverage.png',bbox_inches='tight', dpi=100, facecolor=fig.get_facecolor(), edgecolor='none')
-
 def curve(data, n, upper_limit):
     c = range(int(upper_limit))
     p = []
@@ -171,7 +141,6 @@ def main():
     data = [float(i) for i in data]
     zerolist = [0.0]*(n-len(data))
     data2 = data + zerolist
-    #curve(data2, n, nsplit)
     med = np.median(data2)
     medad = mad(data2)
     curve(data2, n, round((medad*6) + med, 0))
@@ -183,4 +152,4 @@ def main():
     return round((medad*4) + med, 1)
 
 if __name__ == '__main__':
-    print main()
+    print(main())

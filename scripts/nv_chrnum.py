@@ -10,4 +10,4 @@ from sys import argv
 
 gensize = open(argv[1], 'r').read().split('\n')
 lg = len(gensize) - 1
-print lg
+print(lg)

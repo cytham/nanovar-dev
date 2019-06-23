@@ -47,21 +47,21 @@ with open(bed_file) as bed:
                 try:
                     if int(chromsizedict[line.split('\t')[0]][0]) > int(line.split('\t')[1]) or int(line.split('\t')[2]) > int(chromsizedict[line.split('\t')[0]][1]):
                         p = 0
-                        print str(c) + " invalidbedregion"
+                        print(str(c) + " invalidbedregion")
                         break
                     else:
                         if int(line.split('\t')[1]) > int(line.split('\t')[2]):
                             p = 0
-                            print str(c) + " invalidbedrange"
+                            print(str(c) + " invalidbedrange")
                             break
                 except:
                     p = 0
-                    print str(c) + " invalidbedvalue"
+                    print(str(c) + " invalidbedvalue")
                     break
         except:
             p = 0
-            print str(c) + " invalidbedchrom"
+            print(str(c) + " invalidbedchrom")
             break
 
 if p == 1:
-    print "bedpass"
+    print("bedpass")

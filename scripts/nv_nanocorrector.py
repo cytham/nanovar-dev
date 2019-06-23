@@ -192,7 +192,7 @@ for i in lre:
             q = DNNsvdict[longread[i][1:]]
             d,s,bedoutq = querymapper(q)
             bedouts = subjmapper(q,d)
-            print fastsearch(q,s,i)
+            print(fastsearch(q,s,i))
     except:
         pass
 

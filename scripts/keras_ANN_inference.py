@@ -25,6 +25,7 @@ import os
 import logging
 import numpy as np
 import random
+from collections import OrderedDict
 
 if len(argv)<7 or len(argv)>=8:
     sys.exit("Usage: python keras_ANN_inference.py overlap.tsv parse.tsv model.h5 maxovl splitcov [parse or overlap] > parse/overlap.NN.tsv")
@@ -44,9 +45,9 @@ os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'
 
 #For each breakpoint line, assign the long read coverage and normal cov ratio
 def getoverlap(overlap_data):
-    overlapdict = {}
-    normalcovratio = {}
-    classdict = {}
+    overlapdict = OrderedDict()
+    normalcovratio = OrderedDict()
+    classdict = OrderedDict()
     for i in overlap_data:
         if int(i.split('\t')[10]) >= maxovl: #Not in use due to pre-filter of maxovl
             overlapdict[i.split('\t')[8]] = maxovl #Not in use
@@ -84,9 +85,17 @@ def delins(sv):
     if str(sv) == 'S-Nov_Ins_bp' or sv == 'E-Nov_Ins_bp' or sv == 'Nov_Ins' or sv == 'Del':
         return True
 
+#Overlap capper - not in use
+def capper(overlap):
+    if int(overlap) >= 15:
+        overlapcap = 15
+    else:
+        overlapcap = int(overlap)
+    return overlapcap
+
 #Collect features for each breakpoint line and rescale the features between 0 and 1
 def scalefeature(parse_data,overlapdict,normalcovratio,classdict):
-    signdict = {}
+    signdict = OrderedDict()
     for i in parse_data:
         signdict[i.split('\t')[8]] = []
         for s in i.split('\t')[9].split(','):
@@ -111,7 +120,7 @@ def scalefeature(parse_data,overlapdict,normalcovratio,classdict):
         for key in signdict:
             tmp.append(float(signdict[key][i]))
         minmaxlist.append([min(tmp), max(tmp)])
-    normsigndict = {}
+    normsigndict = OrderedDict()
     for key in signdict:
         normsigndict[key] = []
         for i in range(l):
@@ -150,14 +159,14 @@ model = load_model(modelh5)
 predictions = model.predict(readarray)
 predlist = [float(x[0]) for x in predictions]
 
-probdict = {}
+probdict = OrderedDict()
 for i in range(len(tmpkey)):
     probdict[tmpkey[i]] = predlist[i]
 
 if mode == 'parse':
     for i in newpdata:
-        print i + '\t' + str(np.tanh(0.4*float(odict[i.split('\t')[8]]))*probdict[i.split('\t')[8]]) #tanh((((x-1)/9)+1)) or tanh((10(x-1)/31)+0.8) scale lcov between 0.8 and 0.8 and 10.8, and then tanh transform -0.4507
+        print(i + '\t' + str(np.tanh(0.4*float(odict[i.split('\t')[8]]))*probdict[i.split('\t')[8]])) #tanh((((x-1)/9)+1)) or tanh((10(x-1)/31)+0.8) scale lcov between 0.8 and 0.8 and 10.8, and then tanh transform -0.4507
 elif mode == 'overlap':
     for i in odata:
         finalp = finalprob(i.split('\t')[8], i.split('\t')[11])
-        print i + '\t' + str(np.tanh(0.4*float(odict[i.split('\t')[8]]))*finalp) #tanh(((x-1)/9)+1) scale lcov between 1 and 3, and then tanh transform, try this tanh(20((x-1)/31)+0.5)
+        print(i + '\t' + str(np.tanh(0.4*float(odict[i.split('\t')[8]]))*finalp)) #tanh(((x-1)/9)+1) scale lcov between 1 and 3, and then tanh transform, try this tanh(20((x-1)/31)+0.5)

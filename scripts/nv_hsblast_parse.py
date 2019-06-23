@@ -38,7 +38,7 @@ def measureQlen(fasta):
     global qlendict
     qlendict = {}
     with open(fasta) as f:
-        line1 = [next(f) for x in xrange(2)]
+        line1 = [next(f) for x in range(2)]
         if line1[0][0] == '>': #fasta
             qlendict[line1[0].split()[0][1:].strip()] = len(line1[1].strip())
             lc = 0
@@ -46,7 +46,7 @@ def measureQlen(fasta):
                 qlendict[line.split()[0][1:].strip()] = len(next(f).strip())
         elif line1[0][0] == '@': #fastq
             qlendict[line1[0].split()[0][1:].strip()] = len(line1[1].strip())
-            line2 = [next(f) for x in xrange(2)]
+            line2 = [next(f) for x in range(2)]
             lc = 0
             for line in f:
                 if lc == 0:
@@ -83,6 +83,9 @@ def info(line):
     entry = sid + '\t' + str(sstart) + '\t' + str(sstretch) + '\t+\t' + qid + '\t' + qstart + '\t' + str(qstretch) + '\t' + strand + '\t' + str(qlen) + '\t' + evalue + '\t' + bitscore + '\t' + piden + '\t' + nmismatch + '\t' + ngapopen
     return entry
 
+def getbitscore(line):
+    return float(line.split('\t')[10])
+
 def main():
     qlendict = measureQlen(file2)
     tmp = []
@@ -91,11 +94,10 @@ def main():
             tmp.append(info(line))
     tmp.append('null\tnull\tnull\tnull\tnull\tnull')
     l = len(tmp) - 1
-    overlap_tolerance = 20
+    overlap_tolerance = 0.9
     temp = []
     temp2 = []
     output = []
-    finalout = []
     #For Collecting chromosome number
     chromocollect = []
     for i in range(l):
@@ -108,48 +110,52 @@ def main():
             if tmp[i].split('\t')[0].strip() not in chromocollect:
                 chromocollect.append(tmp[i].split('\t')[0].strip())
             nchr = len(chromocollect)
-            output = []
-            j = len(temp)
-            refrange = []
-            refrange.append([int(temp[0].split('\t')[5]), int(temp[0].split('\t')[5]) + int(temp[0].split('\t')[6])])
-            temp2.append(temp[0] + '\tn=' + str(j) + '\t' + str(nchr) + 'chr')
-            for p in range(j)[1:]:
-                queryx = [int(temp[p].split('\t')[5]), int(temp[p].split('\t')[5]) + int(temp[p].split('\t')[6])]
-                queryrange = range(int(temp[p].split('\t')[5]), int(temp[p].split('\t')[5]) + int(temp[p].split('\t')[6]) + 1)
-                clean = 1
-                Trim = 0
-                for r in refrange:
-                    intersect = xrange(max(r[0], queryx[0]), min(r[1], queryx[1]) + 1)
-                    if len(intersect) == 0: #Check if theres no alignment overlap
-                        continue
-                    else: #If there is alignment overlap
-                        if len(intersect) <= overlap_tolerance: #Check if alignment overlap length is within limit
-                            for t in intersect:#Trim alignment to remove overlapping
-                                queryrange.remove(t)
-                                Trim = 1
-                        else: #If alignment overlap length exceed limit
-                            clean = 0
-                            break
-                if clean == 1:
-                    if Trim == 0:
-                        refrange.append(queryx)
-                        temp2.append(temp[p] + '\tn=' + str(j) + '\t' + str(nchr) + 'chr')
-                    elif Trim == 1:
-                        if len(queryrange) > 1: #Check if the trimmed query sequence is still acceptable in length
-                            #Redefine alignment infomation
-                            qstart = min(queryrange)
-                            qend = max(queryrange)
-                            qstretch = len(queryrange) - 1
-                            refrange.append([qstart, qend])
-                            temp2.append('\t'.join(temp[p].split('\t')[0:5]) + '\t' + str(qstart) + '\t' + str(qstretch) + '\t' + '\t'.join(temp[p].split('\t')[7:]) + '\tn=' + str(j) + '\t' + str(nchr) + 'chr')
+            h = len(temp) #total number of alignments
+            while len(temp) != 0:
+                temp.sort(key=getbitscore, reverse=True) #Order by bitscore
+                temp2.append(temp[0] + '\tn=' + str(h) + '\t' + str(nchr) + 'chr') #Lock in lead alignment (highest bitscore)
+                leadrange = [int(temp[0].split('\t')[5]), int(temp[0].split('\t')[5]) + int(temp[0].split('\t')[6])]
+                del temp[0] #remove lead alignment entry
+                j = len(temp)
+                temp3 = []
+                for p in range(j):
+                    queryx = [int(temp[p].split('\t')[5]), int(temp[p].split('\t')[5]) + int(temp[p].split('\t')[6])]
+                    queryrange = range(int(temp[p].split('\t')[5]), int(temp[p].split('\t')[5]) + int(temp[p].split('\t')[6]) + 1)
+                    leadintersect = range(max(leadrange[0], queryx[0]), min(leadrange[1], queryx[1]) + 1)
+                    if len(leadintersect) == 0: #Good, no intersect with lead
+                        temp3.append(temp[p])
+                    else:
+                        new = ''
+                        qulen = len(queryrange)
+                        leadintlen = len(leadintersect)
+                        if float(leadintlen)/qulen > overlap_tolerance: #Check if overlap len is more than x% of query alignment length. Means that x% of query is overlapped, therefore considered weak alignment compared to lead alignment
+                            continue #omitted
+                        else: #If overlap is tolerated, then do trimming
+                            sign = str(temp[p].split('\t')[7])
+                            if queryx[0] == min(leadintersect): #left overlap
+                                if sign == '+': #alter query and subject ranges and adjust bitscore as a proportion of alignment length
+                                    new = temp[p].split('\t')[0] + '\t' + str(int(temp[p].split('\t')[1]) + leadintlen) + '\t' + str(int(temp[p].split('\t')[2]) - leadintlen) + '\t' + '\t'.join(temp[p].split('\t')[3:5]) + '\t' + str(int(temp[p].split('\t')[5]) + leadintlen) + '\t' + str(int(temp[p].split('\t')[6]) - leadintlen) + '\t' + '\t'.join(temp[p].split('\t')[7:10]) + '\t' + str(round(float(temp[p].split('\t')[10])*(float(qulen - leadintlen)/qulen), 2)) + '\t' + '\t'.join(temp[p].split('\t')[11:])
+                                elif sign == '-':
+                                    new = temp[p].split('\t')[0] + '\t' + temp[p].split('\t')[1] + '\t' + str(int(temp[p].split('\t')[2]) - leadintlen) + '\t' + '\t'.join(temp[p].split('\t')[3:5]) + '\t' + str(int(temp[p].split('\t')[5]) + leadintlen) + '\t' + str(int(temp[p].split('\t')[6]) - leadintlen) + '\t' + '\t'.join(temp[p].split('\t')[7:10]) + '\t' + str(round(float(temp[p].split('\t')[10])*(float(qulen - leadintlen)/qulen), 2)) + '\t' + '\t'.join(temp[p].split('\t')[11:])
+                            elif queryx[1] == max(leadintersect): #right overlap
+                                if sign == '+':
+                                    new = temp[p].split('\t')[0] + '\t' + temp[p].split('\t')[1] + '\t' + str(int(temp[p].split('\t')[2]) - leadintlen) + '\t' + '\t'.join(temp[p].split('\t')[3:5]) + '\t' + temp[p].split('\t')[5] + '\t' + str(int(temp[p].split('\t')[6]) - leadintlen) + '\t' + '\t'.join(temp[p].split('\t')[7:10]) + '\t' + str(round(float(temp[p].split('\t')[10])*(float(qulen - leadintlen)/qulen), 2)) + '\t' + '\t'.join(temp[p].split('\t')[11:])
+                                elif sign == '-':
+                                    new = temp[p].split('\t')[0] + '\t' + str(int(temp[p].split('\t')[1]) + leadintlen) + '\t' + str(int(temp[p].split('\t')[2]) - leadintlen) + '\t' + '\t'.join(temp[p].split('\t')[3:5]) + '\t' + temp[p].split('\t')[5] + '\t' + str(int(temp[p].split('\t')[6]) - leadintlen) + '\t' + '\t'.join(temp[p].split('\t')[7:10]) + '\t' + str(round(float(temp[p].split('\t')[10])*(float(qulen - leadintlen)/qulen), 2)) + '\t' + '\t'.join(temp[p].split('\t')[11:])
+                            else: #If intersection lies entirely within the lead, omit query
+                                continue
+                            if int(new.split('\t')[2]) > 0:
+                                temp3.append(new)
+                temp = temp3
             sortdict = {}
             for k in temp2:
                 sortdict[int(k.split('\t')[5])] = k
             output = [value for (key, value) in sorted(sortdict.items())]
             for n in output:
-                print n
+                print(n)
             temp = []
             temp2 = []
+            output = []
             chromocollect = []
 
 if __name__ == '__main__':

@@ -1,10 +1,6 @@
-<p align="center">
-  <img src="http://benoukraf-lab.com/wp-content/uploads/2019/05/Nanovarlogo.png" width="200" alt="accessibility text" align='left'>
-</p>
-
 # NanoVar - Structural variant caller using low-depth Nanopore sequencing 
 
-Latest version 1.0.1
+Latest version 1.1.0
 
 ## Introduction
 NanoVar is a neural-network-based genomic structural variant (SV) caller that utilizes low-depth long-read sequencing data generated from Oxford Nanopore Technologies (ONT). It characterizes SVs with high accuracy and speed using only 4x depth genomic sequencing datasets, thereby saving time, sequencing cost, and computational storage, which makes it compatible for large-scale cohort SV-association studies or routine clinical SV investigations.  
@@ -34,7 +30,7 @@ NanoVar is a neural-network-based genomic structural variant (SV) caller that ut
 * Mac (Work in progress)  
 
 #### Prerequisites:
-1. Python 2 (version 2.7.12 or higher)  
+1. Python 3 (version 3.4.3 or higher)  
 2. Samtools (version 1.4 or higher)  
 3. Bedtools (version 2.26 or higher)  
 
@@ -44,8 +40,8 @@ Optional: Bowtie2 (version 2.3.4 or higher, required only if short-reads will be
 ### 2. Installation
 #### Clone git repository:
 ```
-git clone https://github.com/benoukraflab/NanoVar.git 
-cd NanoVar 
+git clone https://github.com/cytham/nanovar-dev.git 
+cd nanovar-dev
 ./configure
 make && make check
 sudo make install # or add the executable "nanovar" to PATH
@@ -53,10 +49,10 @@ sudo make install # or add the executable "nanovar" to PATH
 Or 
 
 #### Download source code:
-Download tarball or zipped source code from [Releases](https://github.com/benoukraflab/NanoVar/releases)
+Download tarball or zipped source code from [Releases](https://github.com/cytham/nanovar-dev/releases)
 ```
-tar zxvf NanoVar-x.x.tar.gz # or unzip NanoVar-x.x.zip
-cd NanoVar-x.x
+tar zxvf nanovar-x.x.tar.gz # or unzip nanovar-x.x.zip
+cd nanovar-x.x
 ./configure
 make && make check
 sudo make install # or add the executable "nanovar" to PATH
@@ -83,12 +79,10 @@ nanovar [Options] -t 24 -r hg38.fa -l longread.fa -s1 shortread_mate1.fq -s2 sho
 | `-s1` | shortread_mate1.fq | NGS short-read paried-end mate 1 FASTA/FASTQ file |
 | `-s2` | shortread_mate2.fq | NGS short-read paried-end mate 2 FASTA/FASTQ file |
 
-See [Wiki](https://github.com/benoukraflab/NanoVar/wiki) for more information.
+See [Wiki](https://github.com/cytham/nanovar-dev/wiki) for more information.
 
 ## Versioning
-See [Releases](https://github.com/benoukraflab/NanoVar/releases)
-
-For development releases, please visit [nanovar-dev](https://github.com/cytham/nanovar-dev)
+See [Releases](https://github.com/cytham/nanovar-dev/releases)
 
 ## Citation
 
@@ -100,7 +94,7 @@ For development releases, please visit [nanovar-dev](https://github.com/cytham/n
 
 ## License
 
-This project is licensed under GNU General Public License - see [COPYING](https://github.com/benoukraflab/NanoVar/blob/master/COPYING) for details.
+This project is licensed under GNU General Public License - see [COPYING](https://github.com/cytham/nanovar-dev/blob/master/COPYING) for details.
 
 ## Simulation datasets
 SV-simulated datasets used for evaluating SV calling accuracy can be downloaded [here](https://doi.org/10.5281/zenodo.2599376).

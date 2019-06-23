@@ -34,8 +34,8 @@ buildblast: $(hsblastdir)
 	@echo "blast finished!"
 
 pythonvirten:
-	@echo "Generating python 2.7 virtual environment"
-	$(DIR)/virtualenv-15.2.0/virtualenv.py --python=python2.7 $(DIR)/nv_virtualenv
+	@echo "Generating python 3 virtual environment"
+	$(DIR)/virtualenv-15.2.0/virtualenv.py --python=python3 $(DIR)/nv_virtualenv
 	@source $(DIR)/nv_virtualenv/bin/activate; \
 	pip install --upgrade pip; \
 	pip install --requirement requirement.txt; \

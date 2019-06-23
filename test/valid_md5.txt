@@ -14,23 +14,50 @@ dd20f9ca6221d6ccb3ac9f686e7564b1  ref.fa.bwt
 2c5c01b1dcfe571a074120d5ae151051  ref.fa.counts
 0b30579e91aeb001cdb57701cbe31579  ref.fa.counts.obinary
 8c68ba585e3584c0c8e8b2ad13964faf  lread_test.hsblast-ref
-c070563dbae248542179c5080146af5d  lread_test.hsblast-ref.SV0.95.parse150.tsv
-0227aa5acaec17ddabf2aa1f454c48f3  lread_test.hsblast-ref.SV0.95.parse150.1-19.overlap.tsv
-632abc262071733089f262752f374852  lread_test.hsblast-ref.SV0.95.parse150.1-19.overlap.ANN.tsv
-2ce838d744897896ccc3294f86f9ad8e  lread_test.hsblast-ref.SV0.95.parse150.1-19.overlap.ANN0.6.tsv
-8d4196ea6d2553ebc4b7b2c7cf9b4bb3  lread_test.hsblast-ref.SV0.95.parse150.1-19.overlap.ANN0.6.cov.tsv
-ef6fdc3833dd26ca460b652fb42f3481  total vcf
-8766c25990aee00fe07e7b57aa5b1daa  filtered vcf
-05d1a814056f2795113d3858ea2e094c  lread_test.svread-overlap.tsv
-eee6f3aa4d56c05b483bfacde237d4a8  -
-9f91bc2e801c3f1468002fa00342279d  depth_of_coverage.png
-52a1270529bd7b09145d62fb7eb5508d  read_length_dist.png
-02f3d5b3383f3b5e7cf3798a0eef0abb  scatter1.png
-bba441df77ef0359f05e8f1a87b4ca30  scatter2.png
-434b32f889201c120d279e470fa9a420  sv_lengths.png
-d39dfd3490c659bff92603181d84f9a6  sv_type_donut.png
+5faee0c81428759824ba3a933f486e5b  lread_test.hsblast-ref.SV0.95.parse150.tsv
+beadd56eabdfd7a9a50efffbb3943f25  lread_test.hsblast-ref.SV0.95.parse150.1-19.overlap.tsv
+f8066fb8483eff6aa2060f395debc182  lread_test.hsblast-ref.SV0.95.parse150.1-19.overlap.ANN.tsv
+2ec6ec62296b8eab5d2a03a2ad6a38c5  lread_test.hsblast-ref.SV0.95.parse150.1-19.overlap.ANN0.6.tsv
+2b2fc1b8e603c55ab10ff00fca1c4e50  lread_test.hsblast-ref.SV0.95.parse150.1-19.overlap.ANN0.6.cov.tsv
+c6a5532d16cb03c78ac5eb2830800f5a  total vcf
+f95d0605ba71d18e7302b2bcc9f81693  filtered vcf
+53919422fa97b2a58f918960fb137c2a  lread_test.svread-overlap.tsv
+83c434920052d06561232a3aa810b54a  -
+7f8ac04d1cee42b56f40d571d1c1dee9  depth_of_coverage.png
+3375b27c61fafe5b2815768c4476c988  read_length_dist.png
+3f3869843f65add81e6d855204acb3c4  scatter1.png
+f5cb67bac4bb8f0c01bdc8843f0dac29  scatter2.png
+685718303659f99b1a73783b1df46643  sv_lengths.png
+42793c21218e9950b6037d49a194323e  sv_type_donut.png
 
 #Enabled bowtie2 Linux
+5faee0c81428759824ba3a933f486e5b  /home/cy/nanovar-master/nanovar-1.1/test/testout/nanovar_run/hsblast_longreads/lread_test.hsblast-ref.SV0.95.parse150.tsv
+beadd56eabdfd7a9a50efffbb3943f25  /home/cy/nanovar-master/nanovar-1.1/test/testout/nanovar_run/hsblast_longreads/lread_test.hsblast-ref.SV0.95.parse150.1-13.7.overlap.tsv
+f8066fb8483eff6aa2060f395debc182  /home/cy/nanovar-master/nanovar-1.1/test/testout/nanovar_run/hsblast_longreads/lread_test.hsblast-ref.SV0.95.parse150.1-13.7.overlap.ANN.tsv
+2ec6ec62296b8eab5d2a03a2ad6a38c5  /home/cy/nanovar-master/nanovar-1.1/test/testout/nanovar_run/hsblast_longreads/lread_test.hsblast-ref.SV0.95.parse150.1-13.7.overlap.ANN0.tsv
+902771dda5a946ad19fcacfa5c32696b  /home/cy/nanovar-master/nanovar-1.1/test/testout/nanovar_run/bowtie2_shortreads/lread_test.overlap.ANN0.correct.1.bt2
+7bd334bc574ac164fe30cb36da5665de  /home/cy/nanovar-master/nanovar-1.1/test/testout/nanovar_run/bowtie2_shortreads/lread_test.overlap.ANN0.correct.2.bt2
+f8911653dc6cfbd6a22a8fd830fd22ce  /home/cy/nanovar-master/nanovar-1.1/test/testout/nanovar_run/bowtie2_shortreads/lread_test.overlap.ANN0.correct.3.bt2
+4f1727f60d5f7b0b3966913b467c8f00  /home/cy/nanovar-master/nanovar-1.1/test/testout/nanovar_run/bowtie2_shortreads/lread_test.overlap.ANN0.correct.4.bt2
+ab971093cb1ad1bced94273c7323fec1  /home/cy/nanovar-master/nanovar-1.1/test/testout/nanovar_run/bowtie2_shortreads/lread_test.overlap.ANN0.correct.rev.1.bt2
+ae0edb55d6f78643478e14594ffa2528  /home/cy/nanovar-master/nanovar-1.1/test/testout/nanovar_run/bowtie2_shortreads/lread_test.overlap.ANN0.correct.rev.2.bt2
+5cff7e5dde79354463c33fade537db5f  -
+b87ad5f18e11801203e4e6e7911e93a3  /home/cy/nanovar-master/nanovar-1.1/test/testout/nanovar_run/bowtie2_shortreads/lread_test.overlap.ANN0.correct.bow-longr-f2-ns_1.fastq
+570861748d8537edbfc3ec9db697c08e  /home/cy/nanovar-master/nanovar-1.1/test/testout/nanovar_run/bowtie2_shortreads/lread_test.overlap.ANN0.correct.bow-longr-f2-ns_2.fastq
+69dc072f253b37a9db4a168da5d93f5b  /home/cy/nanovar-master/nanovar-1.1/test/testout/nanovar_run/hsblast_longreads/lread_test.hsblast-ref.SV0.95.parse150.1-13.7.overlap.ANN0.0-100.
+tsv
+bae604d98abde7f89c242e2577459de6  -
+e96c6323f91e8368388658998368eec3  -
+53919422fa97b2a58f918960fb137c2a  /home/cy/nanovar-master/nanovar-1.1/test/testout/nanovar_results/lread_test.svread-overlap.tsv
+b4387da41ead05b821328d7834b8f502  -
+7f8ac04d1cee42b56f40d571d1c1dee9  /home/cy/nanovar-master/nanovar-1.1/test/testout/nanovar_results/figures/depth_of_coverage.png
+3375b27c61fafe5b2815768c4476c988  /home/cy/nanovar-master/nanovar-1.1/test/testout/nanovar_results/figures/read_length_dist.png
+3f3869843f65add81e6d855204acb3c4  /home/cy/nanovar-master/nanovar-1.1/test/testout/nanovar_results/figures/scatter1.png
+f5cb67bac4bb8f0c01bdc8843f0dac29  /home/cy/nanovar-master/nanovar-1.1/test/testout/nanovar_results/figures/scatter2.png
+685718303659f99b1a73783b1df46643  /home/cy/nanovar-master/nanovar-1.1/test/testout/nanovar_results/figures/sv_lengths.png
+42793c21218e9950b6037d49a194323e  /home/cy/nanovar-master/nanovar-1.1/test/testout/nanovar_results/figures/sv_type_donut.png
+
+
 f846237582adf9340d40f9c23e2563e4  ref.fa
 353914b702cdb564ebfa41fa8819bc77  lread_test.fa.gz
 3168ccfb91a64a6d0e3174b05bab9adf  sread1.names_48k.fa.gz
@@ -46,29 +73,29 @@ dd20f9ca6221d6ccb3ac9f686e7564b1  ref.fa.bwt
 2c5c01b1dcfe571a074120d5ae151051  ref.fa.counts
 0b30579e91aeb001cdb57701cbe31579  ref.fa.counts.obinary
 8c68ba585e3584c0c8e8b2ad13964faf  lread_test.hsblast-ref
-c070563dbae248542179c5080146af5d  lread_test.hsblast-ref.SV0.95.parse150.tsv
-0227aa5acaec17ddabf2aa1f454c48f3  lread_test.hsblast-ref.SV0.95.parse150.1-19.overlap.tsv
-632abc262071733089f262752f374852  lread_test.hsblast-ref.SV0.95.parse150.1-19.overlap.ANN.tsv
-2ce838d744897896ccc3294f86f9ad8e  lread_test.hsblast-ref.SV0.95.parse150.1-19.overlap.ANN0.6.tsv
-106e03e6661155dd2c650f62156da114  lread_test.overlap.ANN0.6.correct.1.bt2
-eae1a5d74420fb4373fa9cd1c22fa330  lread_test.overlap.ANN0.6.correct.2.bt2
-28226cd64614e0e25cbd3bc9fa02602e  lread_test.overlap.ANN0.6.correct.3.bt2
-c1bd49fe25edf2cf908d8b7a3fa1fa4b  lread_test.overlap.ANN0.6.correct.4.bt2
-f1d1e3d4306eae03933109cb3bb7db6f  lread_test.overlap.ANN0.6.correct.rev.1.bt2
-91da4bff0e657e42c000b7bd412c347b  lread_test.overlap.ANN0.6.correct.rev.2.bt2
-1757a67825471a4a86a37fd1b13fbbf3  lread_test.overlap.ANN0.6.correct.bow-longr-f2-ns.bam > sam
-ca5191a9bf508edd401ad1fcd103c229  lread_test.overlap.ANN0.6.correct.bow-longr-f2-ns_1.fastq
-296303b787a8d9c08989fec3c32073eb  lread_test.overlap.ANN0.6.correct.bow-longr-f2-ns_2.fastq
-e49d43c4147ec01e996594a0fc7c863c  lread_test.hsblast-ref.SV0.95.parse150.1-19.overlap.ANN0.6.0-100.tsv
-24438027e0f8cf21643ab1019d6b96a0  total vcf
-207b8eaf23dca13920bc4b2e04fee283  filtered vcf
-05d1a814056f2795113d3858ea2e094c  lread_test.svread-overlap.tsv
-9f91bc2e801c3f1468002fa00342279d  depth_of_coverage.png
-52a1270529bd7b09145d62fb7eb5508d  read_length_dist.png
-02f3d5b3383f3b5e7cf3798a0eef0abb  scatter1.png
-bba441df77ef0359f05e8f1a87b4ca30  scatter2.png
-434b32f889201c120d279e470fa9a420  sv_lengths.png
-d39dfd3490c659bff92603181d84f9a6  sv_type_donut.png
+5faee0c81428759824ba3a933f486e5b  lread_test.hsblast-ref.SV0.95.parse150.tsv
+beadd56eabdfd7a9a50efffbb3943f25  lread_test.hsblast-ref.SV0.95.parse150.1-19.overlap.tsv
+f8066fb8483eff6aa2060f395debc182  lread_test.hsblast-ref.SV0.95.parse150.1-19.overlap.ANN.tsv
+2ec6ec62296b8eab5d2a03a2ad6a38c5  lread_test.hsblast-ref.SV0.95.parse150.1-19.overlap.ANN0.6.tsv
+902771dda5a946ad19fcacfa5c32696b  lread_test.overlap.ANN0.6.correct.1.bt2
+7bd334bc574ac164fe30cb36da5665de  lread_test.overlap.ANN0.6.correct.2.bt2
+f8911653dc6cfbd6a22a8fd830fd22ce  lread_test.overlap.ANN0.6.correct.3.bt2
+4f1727f60d5f7b0b3966913b467c8f00  lread_test.overlap.ANN0.6.correct.4.bt2
+ab971093cb1ad1bced94273c7323fec1  lread_test.overlap.ANN0.6.correct.rev.1.bt2
+ae0edb55d6f78643478e14594ffa2528  lread_test.overlap.ANN0.6.correct.rev.2.bt2
+5cff7e5dde79354463c33fade537db5f  lread_test.overlap.ANN0.6.correct.bow-longr-f2-ns.bam > sam
+b87ad5f18e11801203e4e6e7911e93a3  lread_test.overlap.ANN0.6.correct.bow-longr-f2-ns_1.fastq
+570861748d8537edbfc3ec9db697c08e  lread_test.overlap.ANN0.6.correct.bow-longr-f2-ns_2.fastq
+69dc072f253b37a9db4a168da5d93f5b  lread_test.hsblast-ref.SV0.95.parse150.1-19.overlap.ANN0.6.0-100.tsv
+bae604d98abde7f89c242e2577459de6  total vcf
+e96c6323f91e8368388658998368eec3  filtered vcf
+53919422fa97b2a58f918960fb137c2a  lread_test.svread-overlap.tsv
+7f8ac04d1cee42b56f40d571d1c1dee9  depth_of_coverage.png
+3375b27c61fafe5b2815768c4476c988  read_length_dist.png
+3f3869843f65add81e6d855204acb3c4  scatter1.png
+f5cb67bac4bb8f0c01bdc8843f0dac29  scatter2.png
+685718303659f99b1a73783b1df46643  sv_lengths.png
+42793c21218e9950b6037d49a194323e  sv_type_donut.png
 
 #Disabled bowtie2 Mac
 f846237582adf9340d40f9c23e2563e4  ref.fa

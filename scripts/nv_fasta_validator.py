@@ -36,8 +36,8 @@ totalbases = 0
 
 with open(longr) as f:
     try:
-        line1 = [next(f) for x in xrange(2)]
-        line2 = [next(f) for x in xrange(2)]
+        line1 = [next(f) for x in range(2)]
+        line2 = [next(f) for x in range(2)]
     except:
         pass
     try:
@@ -90,9 +90,10 @@ with open(longr) as f:
         try:
             if line1:
                 if line1[0][0] == '>':
-                    c = 2
+                    c = -2
+                    qtype = 'fasta'
                 elif line1[0][0] == '@':
-                    c = 2
+                    c = 3
                     corrupt = 1
                 else:
                     c = 1
@@ -104,15 +105,15 @@ with open(longr) as f:
 if corrupt == 0:
     if qtype == 'fasta':
         if c%2 == 0:
-            print str(((tc+c)/2)+2)# + ' ' + str(totalbases)
+            print(str(int(((tc+c)/2)+2)))# + ' ' + str(totalbases)
         else:
-            print str(tc+c) + ' corrupt'
+            print(str(int(tc+c)) + ' corrupt')
     elif qtype == 'fastq':
         if c%4 == 0:
-            print str(((tc+c)/4)+1)# + ' ' + str(totalbases)
+            print(str(int(((tc+c)/4)+1)))# + ' ' + str(totalbases)
         else:
-            print str(tc+c) + ' corrupt'
+            print(str(int(tc+c)) + ' corrupt')
 elif corrupt == 1:
-    print str(tc+c) + ' corrupt'
+    print(str(int(tc+c)) + ' corrupt')
 else:
-    print 'empty'
+    print('empty')

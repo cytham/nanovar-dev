@@ -71,7 +71,7 @@ for i in k:
             else:
                 out.append(tmpread[0].split('\t')[0] + '\t0\t' + str(int(tmpread[0].split('\t')[1]) + buf) + '\t' + tmpread[0].split('\t')[8])
         else:
-            print 'SCOV.py error'
+            print('SCOV.py error')
             break
             sys.exit()
         tmpread = []
@@ -84,7 +84,7 @@ os.system(bedpath + " coverage -a sbed.sort -b " + bam + " > scov.bed")
 scoverage = open('scov.bed', 'r').read().splitlines()
 scovdict = {}
 for i in scoverage:
-    if scovdict.has_key(i.split('\t')[3]):
+    if i.split('\t')[3] in scovdict: #scovdict.has_key(i.split('\t')[3]):
         scovdict[i.split('\t')[3]] += float(i.split('\t')[4])
     else:
         scovdict[i.split('\t')[3]] = float(i.split('\t')[4])
@@ -96,8 +96,8 @@ for i in k:
     else:
         tmpread.append(rdata[i])
         if len(tmpread) == 2:
-            print tmpread[0] + '\t' + str(float(scovdict[tmpread[0].split('\t')[8]])/2)
-            print tmpread[1] + '\t' + str(float(scovdict[tmpread[0].split('\t')[8]])/2)
+            print(tmpread[0] + '\t' + str(float(scovdict[tmpread[0].split('\t')[8]])/2))
+            print(tmpread[1] + '\t' + str(float(scovdict[tmpread[0].split('\t')[8]])/2))
         elif len(tmpread) == 1:
-            print tmpread[0] + '\t' + str(float(scovdict[tmpread[0].split('\t')[8]]))
+            print(tmpread[0] + '\t' + str(float(scovdict[tmpread[0].split('\t')[8]])))
         tmpread = []

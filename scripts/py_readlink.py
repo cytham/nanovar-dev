@@ -13,4 +13,4 @@ import os
 if len(argv)<2 or len(argv)>=3:
     sys.exit("Usage: python py_readlink.py filepath")
 
-print os.path.realpath(sys.argv[1])
+print(os.path.realpath(sys.argv[1]))

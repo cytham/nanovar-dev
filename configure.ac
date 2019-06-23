@@ -1,4 +1,4 @@
-AC_INIT([NanoVar], [1.0], [chengyong.tham@u.nus.edu])
+AC_INIT([NanoVar], [1.1.0], [chengyong.tham@u.nus.edu])
 aclocal
 automake --add-missing
 AM_INIT_AUTOMAKE
@@ -24,9 +24,9 @@ esac
 AM_CONDITIONAL([LINUX], [test "x$os_linux" = xyes])
 AM_CONDITIONAL([DARWIN], [test "x$os_mac" = xyes])
 
-#Python2.7 check
-AC_PATH_PROG(pythoncheck,python2.7,no)
-AS_IF([test "x$pythoncheck" = xno], [AC_MSG_ERROR([Please ensure "python2.7" in \$PATH.])])
+#Python3 check
+AC_PATH_PROG(pythoncheck,python3,no)
+AS_IF([test "x$pythoncheck" = xno], [AC_MSG_ERROR([Please ensure "python3" in \$PATH.])])
 
 #seq check
 AC_PATH_PROG(seqcheck,seq,no)
