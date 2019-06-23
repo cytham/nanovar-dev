@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="http://benoukraf-lab.com/wp-content/uploads/2019/05/Nanovarlogo.png" width="200" alt="accessibility text" align='left'>
+</p>
+
 # NanoVar - Structural variant caller using low-depth Nanopore sequencing 
 
 Latest version 1.1.0
@@ -40,8 +44,8 @@ Optional: Bowtie2 (version 2.3.4 or higher, required only if short-reads will be
 ### 2. Installation
 #### Clone git repository:
 ```
-git clone https://github.com/cytham/nanovar-dev.git 
-cd nanovar-dev
+git clone https://github.com/benoukraflab/NanoVar.git 
+cd NanoVar 
 ./configure
 make && make check
 sudo make install # or add the executable "nanovar" to PATH
@@ -49,10 +53,10 @@ sudo make install # or add the executable "nanovar" to PATH
 Or 
 
 #### Download source code:
-Download tarball or zipped source code from [Releases](https://github.com/cytham/nanovar-dev/releases)
+Download tarball or zipped source code from [Releases](https://github.com/benoukraflab/NanoVar/releases)
 ```
-tar zxvf nanovar-x.x.tar.gz # or unzip nanovar-x.x.zip
-cd nanovar-x.x
+tar zxvf NanoVar-x.x.tar.gz # or unzip NanoVar-x.x.zip
+cd NanoVar-x.x
 ./configure
 make && make check
 sudo make install # or add the executable "nanovar" to PATH
@@ -79,10 +83,12 @@ nanovar [Options] -t 24 -r hg38.fa -l longread.fa -s1 shortread_mate1.fq -s2 sho
 | `-s1` | shortread_mate1.fq | NGS short-read paried-end mate 1 FASTA/FASTQ file |
 | `-s2` | shortread_mate2.fq | NGS short-read paried-end mate 2 FASTA/FASTQ file |
 
-See [Wiki](https://github.com/cytham/nanovar-dev/wiki) for more information.
+See [Wiki](https://github.com/benoukraflab/NanoVar/wiki) for more information.
 
 ## Versioning
-See [Releases](https://github.com/cytham/nanovar-dev/releases)
+See [Releases](https://github.com/benoukraflab/NanoVar/releases)
+
+For development releases, please visit [nanovar-dev](https://github.com/cytham/nanovar-dev)
 
 ## Citation
 
@@ -94,7 +100,7 @@ See [Releases](https://github.com/cytham/nanovar-dev/releases)
 
 ## License
 
-This project is licensed under GNU General Public License - see [COPYING](https://github.com/cytham/nanovar-dev/blob/master/COPYING) for details.
+This project is licensed under GNU General Public License - see [COPYING](https://github.com/benoukraflab/NanoVar/blob/master/COPYING) for details.
 
 ## Simulation datasets
 SV-simulated datasets used for evaluating SV calling accuracy can be downloaded [here](https://doi.org/10.5281/zenodo.2599376).
