@@ -75,7 +75,7 @@ nanovar [Options] -t 24 -r hg38.fa -l longread.fa -s1 shortread_mate1.fq -s2 sho
 
 | Parameter | Argument | Comment |
 | :--- | :--- | :--- |
-| `-t` | num_threads | Indicate number of CPU threads to use |
+| `-t` | num_threads | Indicate number of CPU threads to use (max: 53) |
 | `-r` | reference.fa | Input reference genome in FASTA format |
 | `-l` | longread.fa | Input long-read FASTA/FASTQ file |
 | `-o` | output_directory | Define output directory |
@@ -83,6 +83,7 @@ nanovar [Options] -t 24 -r hg38.fa -l longread.fa -s1 shortread_mate1.fq -s2 sho
 | `-s1` | shortread_mate1.fq | NGS short-read paried-end mate 1 FASTA/FASTQ file |
 | `-s2` | shortread_mate2.fq | NGS short-read paried-end mate 2 FASTA/FASTQ file |
 
+## Documentation
 See [Wiki](https://github.com/benoukraflab/NanoVar/wiki) for more information.
 
 ## Versioning

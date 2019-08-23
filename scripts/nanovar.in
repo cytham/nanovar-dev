@@ -38,7 +38,7 @@ Options:
     -s1 FILE            NGS paired-end short read first mates in FASTQ/FASTA or gzip-compressed FASTQ/FASTA (Optional)
     -s2 FILE            NGS paired-end short read second mates in FASTQ/FASTA or gzip-compressed FASTQ/FASTA (Optional)
     -o DIR              Output directory
-    -t INT              Number of threads available for use. [1]
+    -t INT              Number of threads available for use (Max: 53) [1]
     -f, --filter FILE   BED file with genomic regions to be excluded (e.g. telomeres and centromeres). Either specify name of 
                         supported reference genome filter (i.e. hg38, hg19, mm10, mm9) or provide FULL path to own BED file. [None]
     -w, --SVlen INT     Minimum length estimation of SV to be detected, >=100 bases recommended. [100]
