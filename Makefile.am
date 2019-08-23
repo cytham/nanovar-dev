@@ -178,4 +178,5 @@ distclean: $(SUBDIRS) $(hsblastdir)
 	@rm -f $(DIR)/config.log
 	@rm -rf $(DIR)/autom4te.cache
 	@rm -f $(DIR)/config.status
+	@rm -f $(DIR)/virtualenv-15.2.0/virtualenv.pyc
 	@echo "DISTCLEAN"

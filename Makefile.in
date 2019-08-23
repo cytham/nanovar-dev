@@ -897,6 +897,7 @@ distclean: $(SUBDIRS) $(hsblastdir)
 	@rm -f $(DIR)/config.log
 	@rm -rf $(DIR)/autom4te.cache
 	@rm -f $(DIR)/config.status
+	@rm -f $(DIR)/virtualenv-15.2.0/virtualenv.pyc
 	@echo "DISTCLEAN"
 
 # Tell versions [3.59,3.63) of GNU make to not export all variables.
