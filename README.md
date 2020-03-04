@@ -1,3 +1,5 @@
+This repository has been archived, please visit the latest version [here](https://github.com/cytham/nanovar).
+
 <p align="center">
   <img src="http://benoukraf-lab.com/wp-content/uploads/2019/05/Nanovarlogo.png" width="200" alt="accessibility text" align='left'>
 </p>
